@@ -1,0 +1,25 @@
+.info-card {
+  background: #f5f5f5;
+  padding: 40px;
+  border-radius: 15px;
+  margin-bottom: 40px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.info-icon {
+  font-size: 22px;
+  color: #c54a4a;
+}
+
+.info-content p {
+  line-height: 1.8;
+  margin-bottom: 15px;
+  color: #444;
+}

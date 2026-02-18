@@ -1,0 +1,80 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 70px;
+  background: #f4e9e7;
+  border-bottom: 1px solid #e0d3d0;
+}
+
+/* LOGO SECTION */
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo img {
+  height: 45px;
+  width: auto;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.08);
+}
+
+.brand-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2d1f1f;
+}
+
+/* NAV LINKS */
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  padding: 8px 18px;
+  border-radius: 25px;
+  text-decoration: none;
+  color: #2d1f1f;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.nav-links a:hover {
+  background: #c54a4a;
+  color: white;
+}
+
+/* ICONS */
+
+.icons {
+  display: flex;
+  gap: 20px;
+  font-size: 18px;
+}
+
+.icon-link {
+  text-decoration: none;
+  color: #2d1f1f;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.icon-link:hover {
+  color: #c54a4a;
+  transform: scale(1.05);
+}
+
+.icon-link span {
+  margin-left: 5px;
+  font-weight: 600;
+}

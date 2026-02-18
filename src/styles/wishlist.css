@@ -1,0 +1,36 @@
+.empty-wishlist {
+  text-align: center;
+  padding: 120px 20px;
+}
+
+.empty-wishlist h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.empty-wishlist button {
+  padding: 12px 25px;
+  background: #c54a4a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.wishlist-page {
+  background: #f2e9e7;
+  padding: 80px 0;
+}
+
+.wishlist-page h1 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.wishlist-grid {
+  width: 85%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}

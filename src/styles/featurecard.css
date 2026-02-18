@@ -1,0 +1,13 @@
+.feature-card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.feature-card .icon {
+  font-size: 30px;
+  margin-bottom: 15px;
+}

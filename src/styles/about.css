@@ -1,25 +1,32 @@
 .about-page {
-  background: #f2e9e7;
+  background: #fff9db; /* soft pastel yellow */
   padding-bottom: 60px;
 }
 
 .about-hero {
   text-align: center;
   padding: 80px 20px 40px 20px;
+  background: #fff3b0; /* slightly deeper pastel */
+  border-bottom: 1px solid #f4e6a1;
 }
 
 .about-hero h1 {
   font-size: 50px;
   margin-bottom: 20px;
-  color: #2e1f1f;
+  color: #5a4a00; /* warm brown for contrast */
 }
 
 .about-hero p {
   font-size: 18px;
-  color: #555;
+  color: #7a6a00; /* softer brown-yellow tone */
 }
 
 .about-content {
   width: 80%;
   margin: auto;
+  background: #fffdf0; /* very light creamy yellow */
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.08);
+  
 }

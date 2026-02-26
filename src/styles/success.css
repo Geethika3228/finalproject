@@ -1,18 +1,30 @@
 .success-page {
   text-align: center;
   padding: 150px 20px;
-  background: #f2e9e7;
+  background: #fff8d6; /* pastel yellow */
 }
 
 .success-page h1 {
   margin-bottom: 20px;
+  color: #5a4a00; /* warm brown */
+}
+
+.success-page p {
+  color: #7a6a00;
 }
 
 .success-page button {
   padding: 12px 25px;
   border: none;
-  background: #c54a4a;
-  color: white;
+  background: #f6d365; /* pastel yellow button */
+  color: #5a4a00;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.success-page button:hover {
+  background: #e6c24f;
+  transform: translateY(-2px);
 }

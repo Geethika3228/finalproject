@@ -1,5 +1,5 @@
 .products-page {
-  background: #f2e9e7;
+  background: #fff8d6; /* pastel yellow */
   padding-bottom: 60px;
 }
 
@@ -11,10 +11,11 @@
 .products-header h1 {
   font-size: 50px;
   margin-bottom: 20px;
+  color: #5a4a00; /* warm brown */
 }
 
 .products-header p {
-  color: #555;
+  color: #7a6a00;
   font-size: 18px;
 }
 
@@ -25,34 +26,23 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
-.wishlist-icon {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
 
-.wishlist-icon.active {
-  color: #c54a4a;
-}
+/* PRODUCT CARD */
 
-.wishlist-icon:hover {
-  transform: scale(1.2);
-}
 .product-card {
-  background: white;
+  background: #fffdf0; /* creamy yellow */
   border-radius: 15px;
   padding: 20px;
   transition: 0.3s ease;
   position: relative;
   cursor: pointer;
+  border: 1px solid #f4e6a1;
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.08);
 }
 
 .product-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 15px 35px rgba(255, 200, 0, 0.15);
 }
 
 .product-card img {
@@ -64,18 +54,92 @@
 .product-card:hover img {
   transform: scale(1.05);
 }
+
+/* PRODUCT IMAGE WRAPPER */
+
+.product-image {
+  position: relative;
+}
+
+/* WISHLIST ICON */
+
+.wishlist-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 22px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  color: #b58b00;
+}
+
+.wishlist-icon.active {
+  color: #f6d365; /* pastel yellow active */
+}
+
+.wishlist-icon:hover {
+  transform: scale(1.3);
+}
+
+/* ADD BUTTON */
+
 .add-btn {
   width: 100%;
   padding: 10px;
-  background: #c54a4a;
+  background: #f6d365; /* pastel yellow */
   border: none;
-  color: white;
+  color: #5a4a00;
   border-radius: 8px;
   transition: 0.3s ease;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .add-btn:hover {
-  background: #a93c3c;
+  background: #e6c24f;
   transform: scale(1.03);
+}
+/* FILTER BAR */
+
+.filter-bar {
+  width: 85%;
+  margin: 30px auto;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* SEARCH INPUT */
+
+.filter-bar input {
+  padding: 12px 18px;
+  width: 250px;
+  border-radius: 25px;
+  border: 1px solid #f4e6a1;
+  background: #fffdf0;
+  outline: none;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.filter-bar input:focus {
+  border-color: #f6d365;
+  box-shadow: 0 0 6px rgba(246, 211, 101, 0.4);
+}
+
+/* SELECT DROPDOWNS */
+
+.filter-bar select {
+  padding: 12px 18px;
+  border-radius: 25px;
+  border: 1px solid #f4e6a1;
+  background: #fffdf0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.filter-bar select:hover {
+  border-color: #f6d365;
 }

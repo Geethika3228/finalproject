@@ -1,13 +1,21 @@
 .feature-card {
-  background: white;
+  background: #fffdf0; /* very light creamy pastel yellow */
   padding: 30px;
   border-radius: 15px;
   text-align: center;
   width: 300px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.12);
+  transition: 0.3s ease;
+  border: 1px solid #f4e6a1;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(255, 200, 0, 0.18);
 }
 
 .feature-card .icon {
   font-size: 30px;
   margin-bottom: 15px;
+  color: #d4a017; /* soft golden icon */
 }

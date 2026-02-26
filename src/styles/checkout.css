@@ -1,6 +1,6 @@
 .checkout-page {
   padding: 60px;
-  background: #f3e8e6;
+  background: #fff8d6; /* pastel yellow */
 }
 
 .checkout-container {
@@ -11,23 +11,33 @@
 
 .checkout-form {
   flex: 2;
-  background: white;
+  background: #fffdf0; /* creamy yellow */
   padding: 30px;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  border: 1px solid #f4e6a1;
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.08);
 }
 
 .checkout-form h2 {
   margin-bottom: 10px;
+  color: #5a4a00; /* warm brown */
 }
 
 .checkout-form input {
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid #f0d878;
   font-size: 14px;
+  background: #fffef7;
+}
+
+.checkout-form input:focus {
+  outline: none;
+  border-color: #f6d365;
+  box-shadow: 0 0 5px rgba(246, 211, 101, 0.4);
 }
 
 .row {
@@ -37,21 +47,25 @@
 
 .checkout-summary {
   flex: 1;
-  background: white;
+  background: #fffdf0;
   padding: 30px;
   border-radius: 15px;
+  border: 1px solid #f4e6a1;
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.08);
 }
 
 .summary-row {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  color: #7a6a00;
 }
 
 .total {
   font-weight: bold;
   font-size: 18px;
   margin-top: 10px;
+  color: #5a4a00;
 }
 
 .place-btn {
@@ -59,8 +73,15 @@
   padding: 12px;
   margin-top: 20px;
   border: none;
-  background: #c54a4a;
-  color: white;
+  background: #f6d365; /* pastel yellow button */
+  color: #5a4a00;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.place-btn:hover {
+  background: #e6c24f;
+  transform: translateY(-2px);
 }

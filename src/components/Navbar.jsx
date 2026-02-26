@@ -4,8 +4,7 @@ import { ShopContext } from "../context/ShopContext";
 import "../styles/navbar.css";
 
 function Navbar() {
-
-  const { wishlist, cart } = useContext(ShopContext);
+  const { wishlist, cart, user } = useContext(ShopContext); // 👈 added user
 
   return (
     <nav className="navbar">
@@ -13,7 +12,7 @@ function Navbar() {
       <div className="logo">
         <Link to="/" className="logo-link">
           <img src="/logo.png" alt="KG Logo" />
-          <span className="brand-name">Cozy Crochet</span>
+          <span className="brand-name">FindOra</span>
         </Link>
       </div>
 
@@ -24,6 +23,13 @@ function Navbar() {
       </div>
 
       <div className="icons">
+        {/* 👈 Show username if logged in */}
+        {user ? (
+          <span className="greeting">Hi!! {user}</span>
+        ) : (
+          <Link to="/login" className="icon-link">Login</Link>
+        )}
+
         <Link to="/wishlist" className="icon-link">
           ❤️ <span>{wishlist.length}</span>
         </Link>

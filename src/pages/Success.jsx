@@ -1,15 +1,27 @@
-import "../styles/success.css";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function Success() {
-  return (
-    <div className="success-page">
-      <h1>Order Placed Successfully 🎉</h1>
-      <p>Thank you for shopping with Cozy Crochet!</p>
+  const [message, setMessage] = useState("");
+  const [orderTotal, setOrderTotal] = useState("");
 
-      <Link to="/">
-        <button>Back to Home</button>
-      </Link>
+  useEffect(() => {
+    const savedMessage = localStorage.getItem("orderStatus");
+    const savedTotal = localStorage.getItem("lastOrderTotal");
+
+    if (savedMessage) {
+      setMessage(savedMessage);
+      setOrderTotal(savedTotal);
+
+      // Remove after showing once
+      localStorage.removeItem("orderStatus");
+      localStorage.removeItem("lastOrderTotal");
+    }
+  }, []);
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "100px" }}>
+      <h1>{message} 🎉</h1>
+      {orderTotal && <h3>Total Paid: {orderTotal}</h3>}
     </div>
   );
 }

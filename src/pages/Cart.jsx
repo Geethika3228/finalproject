@@ -41,7 +41,7 @@ function Cart() {
               <div className="item-info">
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
-                <h4>${item.price.toFixed(2)}</h4>
+                <h4>{item.price.toFixed(2)}</h4>
               </div>
 
               <div className="qty-controls">
@@ -68,7 +68,7 @@ function Cart() {
 
           <div className="summary-row">
             <span>Subtotal</span>
-            <span>${getTotal().toFixed(2)}</span>
+            <span>{getTotal().toFixed(2)}</span>
           </div>
 
           <div className="summary-row">
@@ -80,7 +80,7 @@ function Cart() {
 
           <div className="summary-row total">
             <span>Total</span>
-            <span>${getTotal().toFixed(2)}</span>
+            <span>{getTotal().toFixed(2)}</span>
           </div>
 
           <Link to="/checkout">

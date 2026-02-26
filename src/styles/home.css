@@ -8,7 +8,10 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
+  color: #5a4a00; /* warm brown text */
+}
+h1,p{
+  color:black;
 }
 
 .hero-video {
@@ -20,11 +23,12 @@
   object-fit: cover;
 }
 
+/* Yellow overlay instead of black */
 .hero-overlay {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(171, 152, 89, 0.433);
 }
 
 .hero-content {
@@ -60,24 +64,26 @@
   transition: 0.3s ease;
 }
 
+/* Pastel yellow primary */
 .hero-btn.primary {
-  background: #c54a4a;
-  color: white;
+  background: #f6d365;
+  color: #5a4a00;
 }
 
 .hero-btn.primary:hover {
-  background: #a93c3c;
+  background: #e6c24f;
   transform: scale(1.08);
 }
 
+/* Cream secondary */
 .hero-btn.secondary {
-  background: white;
-  color: #c54a4a;
+  background: #fff9dc;
+  color: #b58b00;
 }
 
 .hero-btn.secondary:hover {
-  background: #c54a4a;
-  color: white;
+  background: #f6d365;
+  color: #5a4a00;
 }
 
 /* FEATURES */
@@ -87,22 +93,24 @@
   justify-content: center;
   gap: 40px;
   padding: 100px 0;
-  background: #f9f0ed;
+  background: #fff8d6; /* pastel yellow */
 }
 
-/* FEATURE CARD HOVER */
+/* FEATURE CARD */
 
 .feature-card {
-  background: white;
+  background: #fffdf0;
   padding: 25px;
   border-radius: 15px;
   transition: 0.3s ease;
   cursor: pointer;
+  border: 1px solid #f4e6a1;
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.08);
 }
 
 .feature-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 15px 35px rgba(255, 200, 0, 0.15);
 }
 
 /* FEATURED SECTION */
@@ -110,6 +118,7 @@
 .featured {
   text-align: center;
   padding: 100px 0;
+  background: #fffbe6;
 }
 
 /* CTA SECTION */
@@ -117,7 +126,7 @@
 .cta {
   text-align: center;
   padding: 80px 0;
-  background: #f3e5e2;
+  background: #fff3c4; /* pastel yellow instead of pink */
 }
 
 /* SMOOTH FADE ANIMATION */

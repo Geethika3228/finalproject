@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import "../styles/checkout.css";
 
 function Checkout() {
-
   const { cart, getTotal, clearCart } = useContext(ShopContext);
   const navigate = useNavigate();
 
@@ -35,84 +34,50 @@ function Checkout() {
       return;
     }
 
+    // ✅ Save order success in localStorage
+    localStorage.setItem("orderStatus", "Order Successful!");
+
+    // Optional: Save order details
+    localStorage.setItem("lastOrderTotal", total.toFixed(2));
+
     clearCart();
     navigate("/success");
   };
 
   return (
     <div className="checkout-page">
-
       <h1>Checkout</h1>
 
       <div className="checkout-container">
 
         {/* LEFT FORM */}
         <form className="checkout-form" onSubmit={handleSubmit}>
-
           <h2>Shipping Information</h2>
 
-          <input
-            name="name"
-            placeholder="Full Name"
-            onChange={handleChange}
-          />
-
-          <input
-            name="email"
-            placeholder="Email"
-            onChange={handleChange}
-          />
-
-          <input
-            name="address"
-            placeholder="Address"
-            onChange={handleChange}
-          />
-
-          <input
-            name="city"
-            placeholder="City"
-            onChange={handleChange}
-          />
-
-          <input
-            name="zip"
-            placeholder="ZIP Code"
-            onChange={handleChange}
-          />
+          <input name="name" placeholder="Full Name" onChange={handleChange} />
+          <input name="email" placeholder="Email" onChange={handleChange} />
+          <input name="address" placeholder="Address" onChange={handleChange} />
+          <input name="city" placeholder="City" onChange={handleChange} />
+          <input name="zip" placeholder="ZIP Code" onChange={handleChange} />
 
           <h2>Payment Information</h2>
 
-          <input
-            name="card"
-            placeholder="Card Number"
-            onChange={handleChange}
-          />
+          <input name="card" placeholder="Card Number" onChange={handleChange} />
 
           <div className="row">
-            <input
-              name="expiry"
-              placeholder="MM/YY"
-              onChange={handleChange}
-            />
-            <input
-              name="cvc"
-              placeholder="CVC"
-              onChange={handleChange}
-            />
+            <input name="expiry" placeholder="MM/YY" onChange={handleChange} />
+            <input name="cvc" placeholder="CVC" onChange={handleChange} />
           </div>
-
         </form>
 
         {/* RIGHT SUMMARY */}
         <div className="checkout-summary">
-
           <h2>Order Summary</h2>
 
-          {cart.map(item => (
+          {cart.map((item) => (
             <div key={item.id} className="summary-row">
               <span>{item.name} × {item.quantity}</span>
-              <span>${(item.price * item.quantity).toFixed(2)}</span>
+              <span>{(item.price * item.quantity).toFixed(2)}</span>
             </div>
           ))}
 
@@ -120,35 +85,29 @@ function Checkout() {
 
           <div className="summary-row">
             <span>Subtotal</span>
-            <span>${getTotal().toFixed(2)}</span>
+            <span>{getTotal().toFixed(2)}</span>
           </div>
 
           <div className="summary-row">
             <span>Shipping</span>
-            <span>${shipping.toFixed(2)}</span>
+            <span>{shipping.toFixed(2)}</span>
           </div>
 
           <div className="summary-row">
             <span>Tax</span>
-            <span>${tax.toFixed(2)}</span>
+            <span>{tax.toFixed(2)}</span>
           </div>
 
           <div className="summary-row total">
             <span>Total</span>
-            <span>${total.toFixed(2)}</span>
+            <span>{total.toFixed(2)}</span>
           </div>
 
-          <button
-            className="place-btn"
-            onClick={handleSubmit}
-          >
+          <button className="place-btn" onClick={handleSubmit}>
             Place Order
           </button>
-
         </div>
-
       </div>
-
     </div>
   );
 }

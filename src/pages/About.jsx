@@ -7,51 +7,49 @@ function About() {
 
       {/* Page Header */}
       <section className="about-hero">
-        <h1>About Cozy Crochet</h1>
+        <h1>About Findora – Multi-Category Search Platform</h1>
         <p>
-          Handcrafted with love, designed to bring warmth to your world
+          A robust, scalable platform to search, filter, and explore products across multiple categories.
         </p>
       </section>
 
       {/* Content */}
       <section className="about-content">
 
-        {/* Our Story */}
-        <InfoCard icon="❤️" title="Our Story">
+        {/* Our Mission */}
+        <InfoCard icon="🚀" title="Our Mission">
           <p>
-            Welcome to Cozy Crochet, where every stitch tells a story.
-            Founded with a passion for the timeless art of crochet,
-            we create handmade treasures that bring comfort and joy.
+            Findora is designed to empower users with a seamless browsing experience.
+            Our goal is to provide precise, intuitive search and filter capabilities
+            across diverse product categories.
           </p>
           <p>
-            What started as a hobby blossomed into a labor of love.
-            Each piece is thoughtfully designed and carefully crafted
-            to ensure beauty and durability.
-          </p>
-        </InfoCard>
-
-        {/* Materials */}
-        <InfoCard icon="✂️" title="Materials & Craftsmanship">
-          <p>
-            Quality is at the heart of everything we create.
-            We carefully select premium yarns in a variety of textures
-            and colors to ensure each piece is soft and long-lasting.
-          </p>
-          <p>
-            Every item is handcrafted using traditional crochet techniques
-            passed down through generations.
+            We focus on performance, accessibility, and a user-centric interface
+            to make discovering products faster and more enjoyable.
           </p>
         </InfoCard>
 
-        {/* Contact */}
-        <InfoCard icon="✉️" title="Get in Touch">
+        {/* Technology */}
+        <InfoCard icon="💻" title="Technology & Architecture">
           <p>
-            We'd love to hear from you! Whether you have questions about
-            our products or want to discuss a custom order, feel free to reach out.
+            Findora is built with modern web technologies, including React for
+            front-end rendering, context-based state management, and RESTful APIs.
           </p>
-          <p><strong>Email:</strong> hello@cozycrochet.com</p>
           <p>
-            <strong>Social Media:</strong> Follow us for updates and new creations!
+            The platform uses optimized search algorithms, dynamic filtering,
+            and derived state management for a responsive and fluid user experience.
+          </p>
+        </InfoCard>
+
+        {/* Get Involved */}
+        <InfoCard icon="📬" title="Get Involved">
+          <p>
+            Interested in contributing or learning more? Fineora welcomes developers,
+            testers, and enthusiasts to explore and enhance the platform.
+          </p>
+          <p><strong>Email:</strong> support@findora.com</p>
+          <p>
+            <strong>GitHub:</strong> <a href="https://github.com/your-repo" target="_blank">https://github.com/your-repo</a>
           </p>
         </InfoCard>
 

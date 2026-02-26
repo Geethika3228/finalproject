@@ -22,15 +22,15 @@ function Home() {
         <div className="hero-overlay"></div>
 
         <div className="hero-content">
-          <h1>Welcome to Cozy Crochet</h1>
+          <h1>Welcome to Findora</h1>
           <p>
-            Discover handmade treasures that bring warmth and charm to your life
+            Discover, search, and filter products across multiple categories with ease.
           </p>
 
           <div className="hero-buttons">
             <Link to="/products">
               <button className="hero-btn primary">
-                Shop Now
+                Explore Products
               </button>
             </Link>
 
@@ -47,27 +47,27 @@ function Home() {
       {/* Features */}
       <section className="features">
         <FeatureCard
-          icon="❤️"
-          title="Handmade with Love"
-          description="Every piece is carefully crafted by hand with attention to detail."
+          icon="🔍"
+          title="Advanced Search"
+          description="Find exactly what you need with intelligent search and filtering."
         />
         <FeatureCard
-          icon="✨"
-          title="Unique Designs"
-          description="One-of-a-kind crochet creations that add character."
+          icon="📂"
+          title="Multiple Categories"
+          description="Easily browse products organized across diverse categories."
         />
         <FeatureCard
-          icon="📦"
-          title="Quality Materials"
-          description="We use only the finest yarns for lasting beauty."
+          icon="⚡"
+          title="Fast & Responsive"
+          description="Optimized for performance with instant filtering and smooth UI."
         />
       </section>
 
       {/* Featured Section */}
       <section className="featured">
-        <h2>Featured Creations</h2>
+        <h2>Highlighted Products</h2>
         <p>
-          Explore our collection of handmade crochet items crafted with care.
+          Check out our top products across different categories curated just for you.
         </p>
         <Link to="/products">
           <button className="hero-btn primary">
@@ -78,13 +78,13 @@ function Home() {
 
       {/* CTA */}
       <section className="cta">
-        <h2>Start Your Crochet Journey</h2>
+        <h2>Get Started with Findora</h2>
         <p>
-          Browse our collection and find the perfect handmade piece.
+          Start exploring the platform now and find products efficiently.
         </p>
         <Link to="/products">
           <button className="hero-btn primary">
-            Explore Products
+            Browse Products
           </button>
         </Link>
       </section>

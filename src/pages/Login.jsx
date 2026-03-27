@@ -13,7 +13,7 @@ function Login() {
     e.preventDefault();
     const username = email.split("@")[0];
 setUser(username);
-    navigate("/");
+    navigate("/home");
   };
 
   return (

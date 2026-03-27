@@ -21,7 +21,7 @@ setUser(username);
 
       {/* 🎥 Background Video */}
       <video autoPlay loop muted playsInline className="bg-video">
-        <source src="/hero.mp4" type="video/mp4" />
+        <source src={`${import.meta.env.BASE_URL}hero.mp4`} type="video/mp4" />
       </video>
 
       <div className="login-card">

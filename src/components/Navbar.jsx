@@ -10,7 +10,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="logo">
         <Link to="/" className="logo-link">
-          <img src="/logo.png" alt="KG Logo" />
+         <img src={`${import.meta.env.BASE_URL}logo.png`} alt="KG Logo" />
           <span className="brand-name">Findora</span>
         </Link>
       </div>

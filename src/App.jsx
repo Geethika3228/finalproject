@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -11,7 +11,7 @@ import Checkout from "./pages/Checkout";
 import Success from "./pages/Success";
 import ProductDetails from "./pages/ProductDetails";
 import Login from "./pages/Login";
-import ProtectedRoute from "./components/ProtectedRoute"; // 👈
+import ProtectedRoute from "./components/ProtectedRoute";
 import { ShopProvider } from "./context/ShopContext";
 
 function App() {
@@ -20,12 +20,11 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          {/* Login Route */}
+          <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<Login />} />
 
-          {/* Protected Routes */}
           <Route
-            path="/"
+            path="/home"
             element={
               <ProtectedRoute>
                 <Home />
@@ -88,6 +87,8 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
         <Footer />
       </Router>

@@ -47,7 +47,7 @@ function Products() {
       filtered = [...filtered].sort((a, b) => b.price - a.price);
     }
 
-    // ⭐ Sort by rating (High → Low)
+    // ⭐ Sort by rating (High → Low).+
     if (sortOrder === "ratingHigh") {
       filtered = [...filtered].sort(
         (a, b) => b.rating.rate - a.rating.rate

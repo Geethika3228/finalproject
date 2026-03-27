@@ -4,15 +4,14 @@ import { ShopContext } from "../context/ShopContext";
 import "../styles/navbar.css";
 
 function Navbar() {
-  const { wishlist, cart, user } = useContext(ShopContext); // 👈 added user
+  const { wishlist, cart, user } = useContext(ShopContext);
 
   return (
     <nav className="navbar">
-
       <div className="logo">
         <Link to="/" className="logo-link">
           <img src="/logo.png" alt="KG Logo" />
-          <span className="brand-name">FindOra</span>
+          <span className="brand-name">Findora</span>
         </Link>
       </div>
 
@@ -23,9 +22,10 @@ function Navbar() {
       </div>
 
       <div className="icons">
-        {/* 👈 Show username if logged in */}
         {user ? (
-          <span className="greeting">Hi!! {user}</span>
+          <span className="greeting">
+            Hi!! {typeof user === "string" ? user : user.firstName || user.username}
+          </span>
         ) : (
           <Link to="/login" className="icon-link">Login</Link>
         )}
@@ -38,7 +38,6 @@ function Navbar() {
           🛒 <span>{cart.length}</span>
         </Link>
       </div>
-
     </nav>
   );
 }

@@ -12,7 +12,7 @@ function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     const username = email.split("@")[0];
-    setUser(username);
+setUser(username);
     navigate("/");
   };
 

@@ -7,7 +7,7 @@ function About() {
 
       {/* Page Header */}
       <section className="about-hero">
-        <h1>About Findora – Multi-Category Search Platform</h1>
+        <h1>About FindOra – Multi-Category Search Platform</h1>
         <p>
           A robust, scalable platform to search, filter, and explore products across multiple categories.
         </p>
@@ -19,7 +19,7 @@ function About() {
         {/* Our Mission */}
         <InfoCard icon="🚀" title="Our Mission">
           <p>
-            Findora is designed to empower users with a seamless browsing experience.
+            FindOra is designed to empower users with a seamless browsing experience.
             Our goal is to provide precise, intuitive search and filter capabilities
             across diverse product categories.
           </p>
@@ -32,7 +32,7 @@ function About() {
         {/* Technology */}
         <InfoCard icon="💻" title="Technology & Architecture">
           <p>
-            Findora is built with modern web technologies, including React for
+            FindOra is built with modern web technologies, including React for
             front-end rendering, context-based state management, and RESTful APIs.
           </p>
           <p>
@@ -49,7 +49,7 @@ function About() {
           </p>
           <p><strong>Email:</strong> support@findora.com</p>
           <p>
-            <strong>GitHub:</strong> <a href="https://github.com/your-repo" target="_blank">https://github.com/your-repo</a>
+            <strong>GitHub:</strong> <a href="https://geethika3228.github.io/finalproject/" target="_blank">https://geethika3228.github.io/finalproject/</a>
           </p>
         </InfoCard>
 

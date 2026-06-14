@@ -8,11 +8,18 @@ function Wishlist() {
 
   const { wishlist } = useContext(ShopContext);
 
-  if (wishlist.length === 0) {
+  console.log("wishlist =", wishlist);
+
+  if (!wishlist || wishlist.length === 0) {
     return (
       <div className="empty-wishlist">
         <h1>Your Wishlist is Empty</h1>
-        <p>Save your favorite items here so you can easily find them later!</p>
+
+        <p>
+          Save your favorite items here so you can
+          easily find them later!
+        </p>
+
         <Link to="/products">
           <button>Browse Products</button>
         </Link>
@@ -22,13 +29,20 @@ function Wishlist() {
 
   return (
     <div className="wishlist-page">
+
       <h1>Your Wishlist</h1>
 
       <div className="wishlist-grid">
-        {wishlist.map(item => (
-          <ProductCard key={item.id} product={item} />
+
+        {wishlist.map((item) => (
+          <ProductCard
+            key={item.id}
+            product={item}
+          />
         ))}
+
       </div>
+
     </div>
   );
 }

@@ -6,7 +6,7 @@ function Footer() {
       <div className="footer-container">
         {/* About Section */}
         <div>
-          <h3>Fineora</h3>
+          <h3>FindOra</h3>
           <p>
             Multi-category product search and filter platform designed for speed and simplicity.
           </p>
@@ -24,13 +24,13 @@ function Footer() {
         {/* Contact Section */}
         <div>
           <h4>Contact</h4>
-          <p>Email: support@fineora.com</p>
-          <p>GitHub: <a href="https://github.com/your-repo" target="_blank">github.com/your-repo</a></p>
+          <p>Email: support@findora.com</p>
+          <p>GitHub: <a href="https://geethika3228.github.io/finalproject/" target="_blank">github.com/your-repo</a></p>
         </div>
       </div>
 
       <p className="copyright">
-        © 2026 Fineora
+        © 2026 FindOra
       </p>
     </footer>
   );

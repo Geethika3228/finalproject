@@ -3,126 +3,184 @@ import ProductCard from "../components/ProductCard";
 import "../styles/products.css";
 
 function Products() {
-
   const [products, setProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [sortOrder, setSortOrder] = useState("");
   const [category, setCategory] = useState("");
   const [loading, setLoading] = useState(true);
 
-  // 🔥 FETCH PRODUCTS
+  const categoryMap = {
+    1: "Crochet",
+    2: "Teddy Bears",
+    3: "Keychains",
+    4: "Unique Gifts",
+    5: "Accessories"
+  };
+
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then(res => res.json())
-      .then(data => {
+    fetch("http://localhost:8000/productservice/products")
+      .then((res) => res.json())
+      .then((data) => {
         setProducts(data);
+        setAllProducts(data);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
   }, []);
 
-  // 🔥 GET UNIQUE CATEGORIES (Dynamic)
+  const handleSemanticSearch = async (query) => {
+    setSearch(query);
+
+    if (query.trim() === "") {
+      setProducts(allProducts);
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "http://localhost:8000/semantic-search",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            query: query
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      const semanticProducts = data.map(
+        (item) => item.product
+      );
+
+      setProducts(semanticProducts);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const categories = useMemo(() => {
-    return [...new Set(products.map(p => p.category))];
+    return [
+      ...new Set(
+        products.map((p) => p.categoryId)
+      )
+    ];
   }, [products]);
 
-  // 🔥 FILTER + SORT (Derived State)
   const filteredProducts = useMemo(() => {
+    let filtered = [...products];
 
-    let filtered = products.filter(p =>
-      p.title.toLowerCase().includes(search.toLowerCase())
-    );
-
-    // ✅ Filter by category
     if (category !== "") {
-      filtered = filtered.filter(p => p.category === category);
-    }
-
-    // ✅ Sort by price
-    if (sortOrder === "low") {
-      filtered = [...filtered].sort((a, b) => a.price - b.price);
-    }
-
-    if (sortOrder === "high") {
-      filtered = [...filtered].sort((a, b) => b.price - a.price);
-    }
-
-    // ⭐ Sort by rating (High → Low).+
-    if (sortOrder === "ratingHigh") {
-      filtered = [...filtered].sort(
-        (a, b) => b.rating.rate - a.rating.rate
+      filtered = filtered.filter(
+        (p) =>
+          p.categoryId.toString() === category
       );
     }
 
-    // ⭐ Sort by rating (Low → High)
-    if (sortOrder === "ratingLow") {
-      filtered = [...filtered].sort(
-        (a, b) => a.rating.rate - b.rating.rate
+    if (sortOrder === "low") {
+      filtered.sort(
+        (a, b) => a.price - b.price
+      );
+    }
+
+    if (sortOrder === "high") {
+      filtered.sort(
+        (a, b) => b.price - a.price
       );
     }
 
     return filtered;
-
-  }, [products, search, sortOrder, category]);
+  }, [products, category, sortOrder]);
 
   return (
     <div className="products-page">
+      <h1>Our Handmade Products</h1>
 
-      <section className="products-header">
-        <h1>Our Products</h1>
-        <p>Search and filter across multiple categories</p>
-      </section>
+      <p>
+        Search and filter across multiple
+        categories
+      </p>
 
-      {/* 🔥 FILTER BAR */}
       <div className="filter-bar">
-
-        {/* 🔍 SEARCH */}
         <input
           type="text"
-          placeholder="Search products..."
+          placeholder="Semantic Search..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) =>
+            handleSemanticSearch(
+              e.target.value
+            )
+          }
         />
 
-        {/* 🔽 SORT */}
         <select
           value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
+          onChange={(e) =>
+            setSortOrder(e.target.value)
+          }
         >
-          <option value="">Sort By</option>
-          <option value="low">Price Low → High</option>
-          <option value="high">Price High → Low</option>
-          <option value="ratingHigh">Rating High → Low</option>
-          <option value="ratingLow">Rating Low → High</option>
+          <option value="">
+            Sort By
+          </option>
+
+          <option value="low">
+            Price Low → High
+          </option>
+
+          <option value="high">
+            Price High → Low
+          </option>
         </select>
 
-        {/* 🏷 CATEGORY FILTER */}
         <select
           value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={(e) =>
+            setCategory(e.target.value)
+          }
         >
-          <option value="">All Categories</option>
-          {categories.map((cat, index) => (
-            <option key={index} value={cat}>
-              {cat}
+          <option value="">
+            All Categories
+          </option>
+
+          {categories.map((cat) => (
+            <option
+              key={cat}
+              value={cat}
+            >
+              {categoryMap[cat]}
             </option>
           ))}
         </select>
-
       </div>
 
       {loading ? (
-        <h2 style={{ textAlign: "center", marginTop: "50px" }}>
+        <h2
+          style={{
+            textAlign: "center",
+            marginTop: "50px"
+          }}
+        >
           Loading Products...
         </h2>
       ) : (
         <section className="products-grid">
-          {filteredProducts.map(product => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          {filteredProducts.map(
+            (product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+              />
+            )
+          )}
         </section>
       )}
-
     </div>
   );
 }

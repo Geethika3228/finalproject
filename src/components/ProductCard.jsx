@@ -5,49 +5,74 @@ import { Link } from "react-router-dom";
 
 function ProductCard({ product }) {
 
-  const { wishlist, addToWishlist, removeFromWishlist, addToCart } =
-    useContext(ShopContext);
+  const {
+    wishlist,
+    addToWishlist,
+    removeFromWishlist,
+    addToCart
+  } = useContext(ShopContext);
 
-  const isLiked = wishlist.some(item => item.id === product.id);
+  const isLiked = wishlist.some(
+    item => item.id === product.id
+  );
 
   const toggleWishlist = () => {
+
     if (isLiked) {
       removeFromWishlist(product.id);
     } else {
       addToWishlist(product);
     }
+
+  };
+
+  const categoryMap = {
+    1: "Crochet",
+    2: "Teddy Bears",
+    3: "Keychains",
+    4: "Unique Gifts",
+    5: "Accessories"
   };
 
   return (
     <div className="product-card">
 
       <div className="product-image">
-        <img src={product.image} alt={product.title} />
+
+        <img
+          src={
+            product.imageUrl.startsWith("http")
+              ? product.imageUrl
+              : `${import.meta.env.BASE_URL}images/${product.imageUrl}`
+          }
+          alt={product.itemName}
+        />
 
         <span
-          className={`wishlist-icon ${isLiked ? "active" : ""}`}
+          className={`wishlist-icon ${
+            isLiked ? "active" : ""
+          }`}
           onClick={toggleWishlist}
         >
           {isLiked ? "❤️" : "🤍"}
         </span>
+
       </div>
 
       <div className="product-info">
-        <h3>{product.title}</h3>
+
+        <h3>{product.itemName}</h3>
 
         <p className="category">
-          Category: {product.category}
+          Category: {categoryMap[product.categoryId]}
         </p>
 
-        <p>{product.description.substring(0, 60)}...</p>
+        <p>
+          {product.description?.substring(0, 60)}
+          ...
+        </p>
 
         <h4>₹{product.price}</h4>
-
-        <p className="rating">
-          ⭐ {product.rating?.rate} / 5
-          <br />
-          ({product.rating?.count} reviews)
-        </p>
 
         <button
           className="add-btn"
@@ -56,9 +81,13 @@ function ProductCard({ product }) {
           🛒 Add to Cart
         </button>
 
-        <Link to={`/product/${product.id}`} className="details-link">
+        <Link
+          to={`/product/${product.id}`}
+          className="details-link"
+        >
           View Details →
         </Link>
+
       </div>
 
     </div>

@@ -1,0 +1,11 @@
+@import "./login.css";
+
+.forgot-password a {
+  color: #b58b00;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  color: #5a4a00;
+  text-decoration: underline;
+}

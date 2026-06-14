@@ -4,11 +4,7 @@ export const ShopContext = createContext();
 
 export const ShopProvider = ({ children }) => {
 
-  // 🔥 Load from localStorage initially
-  const [wishlist, setWishlist] = useState(() => {
-    const saved = localStorage.getItem("wishlist");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [wishlist, setWishlist] = useState([]);
 
   const [cart, setCart] = useState(() => {
     const saved = localStorage.getItem("cart");
@@ -20,88 +16,211 @@ export const ShopProvider = ({ children }) => {
     return saved ? JSON.parse(saved) : null;
   });
 
-  // 🔥 Save to localStorage whenever state changes
-  useEffect(() => {
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
-  }, [wishlist]);
+  const [token, setToken] = useState(() => {
+    return localStorage.getItem("token");
+  });
 
+  // Load wishlist after login
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
 
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
+    if (!user || !user.id) return;
+
+    fetch(`http://localhost:8081/wishlist/${user.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setWishlist(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
   }, [user]);
 
-  // ❤️ Wishlist
-  const addToWishlist = (product) => {
-    if (!wishlist.find(item => item.id === product.id)) {
-      setWishlist([...wishlist, product]);
+  // Save cart
+  useEffect(() => {
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(cart)
+    );
+  }, [cart]);
+
+  // Save user
+  useEffect(() => {
+    localStorage.setItem(
+      "user",
+      JSON.stringify(user)
+    );
+  }, [user]);
+
+  // Save token
+  useEffect(() => {
+
+    if (token) {
+      localStorage.setItem(
+        "token",
+        token
+      );
     }
+
+  }, [token]);
+
+  // -----------------------
+  // WISHLIST
+  // -----------------------
+
+  const addToWishlist = async (product) => {
+
+    if (!user) {
+      alert("Please login first");
+      return;
+    }
+
+    const alreadyExists = wishlist.find(
+      item => item.productId === product.id
+    );
+
+    if (alreadyExists) {
+      return;
+    }
+
+    await fetch(
+      `http://localhost:8081/wishlist/add?userId=${user.id}&productId=${product.id}`,
+      {
+        method: "POST"
+      }
+    );
+
+    const response = await fetch(
+      `http://localhost:8081/wishlist/${user.id}`
+    );
+
+    const data = await response.json();
+
+    setWishlist(data);
   };
 
-  const isInWishlist = (id) =>
-    wishlist.some(item => item.id === id);
+  const removeFromWishlist = async (productId) => {
 
-  const removeFromWishlist = (id) =>
-    setWishlist(wishlist.filter(item => item.id !== id));
+    await fetch(
+      `http://localhost:8081/wishlist/remove?userId=${user.id}&productId=${productId}`,
+      {
+        method: "DELETE"
+      }
+    );
 
-  // 🛒 Cart
+    const response = await fetch(
+      `http://localhost:8081/wishlist/${user.id}`
+    );
+
+    const data = await response.json();
+
+    setWishlist(data);
+  };
+
+  const isInWishlist = (productId) =>
+    wishlist.some(
+      (item) => item.productId === productId
+    );
+
+  // -----------------------
+  // CART
+  // -----------------------
+
   const addToCart = (product) => {
-    const existing = cart.find(item => item.id === product.id);
+
+    const existing = cart.find(
+      (item) => item.id === product.id
+    );
 
     if (existing) {
-      setCart(cart.map(item =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      ));
+
+      setCart(
+        cart.map((item) =>
+          item.id === product.id
+            ? {
+                ...item,
+                quantity: item.quantity + 1
+              }
+            : item
+        )
+      );
+
     } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
+
+      setCart([
+        ...cart,
+        {
+          ...product,
+          quantity: 1
+        }
+      ]);
+
     }
   };
 
   const increaseQty = (id) =>
-    setCart(cart.map(item =>
-      item.id === id
-        ? { ...item, quantity: item.quantity + 1 }
-        : item
-    ));
+    setCart(
+      cart.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              quantity: item.quantity + 1
+            }
+          : item
+      )
+    );
 
   const decreaseQty = (id) =>
-    setCart(cart.map(item =>
-      item.id === id && item.quantity > 1
-        ? { ...item, quantity: item.quantity - 1 }
-        : item
-    ));
+    setCart(
+      cart.map((item) =>
+        item.id === id &&
+        item.quantity > 1
+          ? {
+              ...item,
+              quantity: item.quantity - 1
+            }
+          : item
+      )
+    );
 
   const removeFromCart = (id) =>
-    setCart(cart.filter(item => item.id !== id));
+    setCart(
+      cart.filter(
+        (item) => item.id !== id
+      )
+    );
 
   const getTotal = () =>
     cart.reduce(
-      (total, item) => total + item.price * item.quantity,
+      (total, item) =>
+        total +
+        item.price * item.quantity,
       0
     );
 
-  const clearCart = () => setCart([]);
+  const clearCart = () =>
+    setCart([]);
 
   return (
-    <ShopContext.Provider value={{
-      wishlist,
-      cart,
-      addToWishlist,
-      removeFromWishlist,
-      addToCart,
-      increaseQty,
-      decreaseQty,
-      removeFromCart,
-      getTotal,
-      clearCart,
-      isInWishlist,
-      user,
-      setUser
-    }}>
+    <ShopContext.Provider
+      value={{
+        wishlist,
+        cart,
+        addToWishlist,
+        removeFromWishlist,
+        addToCart,
+        increaseQty,
+        decreaseQty,
+        removeFromCart,
+        getTotal,
+        clearCart,
+        isInWishlist,
+        user,
+        setUser,
+        token,
+        setToken
+      }}
+    >
       {children}
     </ShopContext.Provider>
   );

@@ -11,7 +11,7 @@ function Navbar() {
       <div className="logo">
         <Link to="/" className="logo-link">
          <img src={`${import.meta.env.BASE_URL}logo.png`} alt="KG Logo" />
-          <span className="brand-name">Findora</span>
+          <span className="brand-name">FindOra</span>
         </Link>
       </div>
 

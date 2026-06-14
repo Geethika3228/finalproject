@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate
+} from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -11,7 +17,12 @@ import Checkout from "./pages/Checkout";
 import Success from "./pages/Success";
 import ProductDetails from "./pages/ProductDetails";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import AdminDashboard from "./pages/AdminDashboard";
+
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminRoute from "./components/AdminRoute";
+
 import { ShopProvider } from "./context/ShopContext";
 
 function App() {
@@ -19,9 +30,23 @@ function App() {
     <ShopProvider>
       <Router>
         <Navbar />
+
         <Routes>
-          <Route path="/" element={<Navigate to="/login" replace />} />
-          <Route path="/login" element={<Login />} />
+
+          <Route
+            path="/"
+            element={<Navigate to="/login" replace />}
+          />
+
+          <Route
+            path="/login"
+            element={<Login />}
+          />
+
+          <Route
+            path="/signup"
+            element={<Signup />}
+          />
 
           <Route
             path="/home"
@@ -31,6 +56,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/about"
             element={
@@ -39,6 +65,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/products"
             element={
@@ -47,6 +74,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/wishlist"
             element={
@@ -55,6 +83,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/cart"
             element={
@@ -63,6 +92,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/checkout"
             element={
@@ -71,6 +101,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/success"
             element={
@@ -79,6 +110,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/product/:id"
             element={
@@ -88,8 +120,22 @@ function App() {
             }
           />
 
-          <Route path="*" element={<Navigate to="/login" replace />} />
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <AdminDashboard />
+              </AdminRoute>
+            }
+          />
+
+          <Route
+            path="*"
+            element={<Navigate to="/login" replace />}
+          />
+
         </Routes>
+
         <Footer />
       </Router>
     </ShopProvider>

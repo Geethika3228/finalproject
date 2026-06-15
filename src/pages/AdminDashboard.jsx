@@ -16,40 +16,57 @@ function AdminDashboard() {
   });
 
   const fetchUsers = async () => {
-    try {
-      const response = await fetch(
-        "http://localhost:8000/productservice/users"
-      );
+  try {
 
-      const data = await response.json();
+    const token = localStorage.getItem("token");
 
-      setUsers(data);
-      setProducts([]);
-      setMode("users");
-      setEditingProduct(null);
-    } catch (error) {
-      console.error(error);
-      alert("Failed to load users");
-    }
-  };
+    const response = await fetch(
+      "http://localhost:8000/productservice/users",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
 
+    const data = await response.json();
+
+    setUsers(data);
+    setProducts([]);
+    setMode("users");
+    setEditingProduct(null);
+
+  } catch (error) {
+    console.error(error);
+    alert("Failed to load users");
+  }
+};
   const fetchProducts = async () => {
-    try {
-      const response = await fetch(
-        "http://localhost:8000/productservice/products"
-      );
+  try {
 
-      const data = await response.json();
+    const token = localStorage.getItem("token");
 
-      setProducts(data);
-      setUsers([]);
-      setMode("products");
-      setEditingProduct(null);
-    } catch (error) {
-      console.error(error);
-      alert("Failed to load products");
-    }
-  };
+    const response = await fetch(
+      "http://localhost:8000/productservice/products",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    setProducts(data);
+    setUsers([]);
+    setMode("products");
+    setEditingProduct(null);
+
+  } catch (error) {
+    console.error(error);
+    alert("Failed to load products");
+  }
+};
 
   const handleInputChange = (e) => {
     setProductForm({
@@ -58,56 +75,64 @@ function AdminDashboard() {
     });
   };
 
-  const addProduct = async () => {
-    try {
-      await fetch(
-        "http://localhost:8000/productservice/products",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            ...productForm,
-            price: parseFloat(productForm.price),
-            categoryId: parseInt(productForm.categoryId)
-          })
+ const addProduct = async () => {
+  try {
+
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      "http://localhost:8000/productservice/products",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          ...productForm,
+          price: parseFloat(productForm.price),
+          categoryId: parseInt(productForm.categoryId)
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    console.log(data);
+
+    alert("Product added 🔥");
+
+    fetchProducts();
+
+  } catch (error) {
+    console.error(error);
+    alert("Failed to add product");
+  }
+};
+
+ const deleteProduct = async (id) => {
+  try {
+
+    const token = localStorage.getItem("token");
+
+    await fetch(
+      `http://localhost:8000/productservice/products/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`
         }
-      );
+      }
+    );
 
-      alert("Product added 🔥");
+    alert("Product deleted 🗑");
+    fetchProducts();
 
-      setProductForm({
-        itemName: "",
-        description: "",
-        price: "",
-        imageUrl: "",
-        categoryId: ""
-      });
-
-      fetchProducts();
-    } catch (error) {
-      console.error(error);
-      alert("Failed to add product");
-    }
-  };
-
-  const deleteProduct = async (id) => {
-    try {
-      await fetch(
-        `http://localhost:8000/productservice/products/${id}`,
-        {
-          method: "DELETE"
-        }
-      );
-
-      alert("Product deleted 🗑");
-      fetchProducts();
-    } catch (error) {
-      console.error(error);
-      alert("Failed to delete product");
-    }
-  };
+  } catch (error) {
+    console.error(error);
+    alert("Failed to delete product");
+  }
+};
 
   const startEdit = (product) => {
     setEditingProduct(product.id);
@@ -121,41 +146,46 @@ function AdminDashboard() {
     });
   };
 
-  const updateProduct = async () => {
-    try {
-      await fetch(
-        `http://localhost:8000/productservice/products/${editingProduct}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            ...productForm,
-            price: parseFloat(productForm.price),
-            categoryId: parseInt(productForm.categoryId)
-          })
-        }
-      );
+const updateProduct = async () => {
+  try {
 
-      alert("Product updated ✏");
+    const token = localStorage.getItem("token");
 
-      setEditingProduct(null);
+    await fetch(
+      `http://localhost:8000/productservice/products/${editingProduct}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          ...productForm,
+          price: parseFloat(productForm.price),
+          categoryId: parseInt(productForm.categoryId)
+        })
+      }
+    );
 
-      setProductForm({
-        itemName: "",
-        description: "",
-        price: "",
-        imageUrl: "",
-        categoryId: ""
-      });
+    alert("Product updated ✏");
 
-      fetchProducts();
-    } catch (error) {
-      console.error(error);
-      alert("Failed to update product");
-    }
-  };
+    setEditingProduct(null);
+
+    setProductForm({
+      itemName: "",
+      description: "",
+      price: "",
+      imageUrl: "",
+      categoryId: ""
+    });
+
+    fetchProducts();
+
+  } catch (error) {
+    console.error(error);
+    alert("Failed to update product");
+  }
+};
 
   return (
   <div className="admin-page">

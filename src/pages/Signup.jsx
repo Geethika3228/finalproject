@@ -6,11 +6,12 @@ function Signup() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    fullname: "",
-    email: "",
-    password: ""
-  });
-
+  fullname: "",
+  email: "",
+  password: "",
+  role: 1,
+  status: 1
+});
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -23,7 +24,7 @@ function Signup() {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/productservice/signup",
+       "http://localhost:8081/user/signup",
         {
           method: "POST",
           headers: {
@@ -35,7 +36,7 @@ function Signup() {
 
       const data = await response.json();
 
-      if (data.code === 200) {
+      if (response.ok || data.code === 200) {
         alert("Account created successfully 🎉");
         navigate("/login");
       } else {

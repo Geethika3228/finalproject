@@ -19,17 +19,40 @@ function Products() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8000/productservice/products")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-        setAllProducts(data);
+    const fetchProducts = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const response = await fetch(
+          "http://localhost:8000/productservice/products",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
+
+        const data = await response.json();
+
+        console.log("PRODUCT DATA:", data);
+
+        if (Array.isArray(data)) {
+          setProducts(data);
+          setAllProducts(data);
+        } else {
+          console.error("Expected array but got:", data);
+          setProducts([]);
+          setAllProducts([]);
+        }
+
         setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
         setLoading(false);
-      });
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   const handleSemanticSearch = async (query) => {
@@ -171,13 +194,17 @@ function Products() {
         </h2>
       ) : (
         <section className="products-grid">
-          {filteredProducts.map(
-            (product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-              />
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map(
+              (product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                />
+              )
             )
+          ) : (
+            <h2>No Products Found</h2>
           )}
         </section>
       )}

@@ -25,7 +25,7 @@ export const ShopProvider = ({ children }) => {
 
     if (!user || !user.id) return;
 
-    fetch(`http://localhost:8081/wishlist/${user.id}`)
+   fetch(`http://localhost:5000/wishlist/${user.id}`)
       .then((res) => res.json())
       .then((data) => {
         setWishlist(data);
@@ -76,23 +76,30 @@ export const ShopProvider = ({ children }) => {
     }
 
     const alreadyExists = wishlist.find(
-      item => item.productId === product.id
-    );
+  item => item.id === product.id
+);
 
     if (alreadyExists) {
       return;
     }
 
     await fetch(
-      `http://localhost:8081/wishlist/add?userId=${user.id}&productId=${product.id}`,
-      {
-        method: "POST"
-      }
-    );
+  "http://localhost:5000/wishlist",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      userId: user.id,
+      productId: product.id
+    })
+  }
+);
 
     const response = await fetch(
-      `http://localhost:8081/wishlist/${user.id}`
-    );
+  `http://localhost:5000/wishlist/${user.id}`
+);
 
     const data = await response.json();
 
@@ -102,15 +109,15 @@ export const ShopProvider = ({ children }) => {
   const removeFromWishlist = async (productId) => {
 
     await fetch(
-      `http://localhost:8081/wishlist/remove?userId=${user.id}&productId=${productId}`,
-      {
-        method: "DELETE"
-      }
-    );
+  `http://localhost:5000/wishlist/${user.id}/${productId}`,
+  {
+    method: "DELETE"
+  }
+);
 
     const response = await fetch(
-      `http://localhost:8081/wishlist/${user.id}`
-    );
+  `http://localhost:5000/wishlist/${user.id}`
+);
 
     const data = await response.json();
 
@@ -118,9 +125,9 @@ export const ShopProvider = ({ children }) => {
   };
 
   const isInWishlist = (productId) =>
-    wishlist.some(
-      (item) => item.productId === productId
-    );
+  wishlist.some(
+    (item) => item.id === productId
+  );
 
   // -----------------------
   // CART

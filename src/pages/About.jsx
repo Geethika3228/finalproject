@@ -18,6 +18,29 @@ function About() {
 
         {/* Our Mission */}
         <InfoCard icon="🚀" title="Our Mission">
+          {/* Team Members */}
+<InfoCard icon="👨‍💻" title="Project Team">
+  <p>
+    <strong>Team DBEDBD-S04-13</strong>
+  </p>
+
+  <p>
+    <strong>Geethika</strong> – 2500030117
+  </p>
+
+  <p>
+    <strong>Srija</strong> – 2500030855
+  </p>
+
+  <p>
+    <strong>Sajida</strong> – 2500030142
+  </p>
+
+  <p>
+    © 2026 FindOra – Multi-Category Search Platform.
+    All Rights Reserved.
+  </p>
+</InfoCard>
           <p>
             FindOra is designed to empower users with a seamless browsing experience.
             Our goal is to provide precise, intuitive search and filter capabilities
